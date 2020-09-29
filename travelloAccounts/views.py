@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 def register(request):
+    SpecialSym = ['$', '@', '#', '%', '!']
     if request.method == 'POST':
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -12,6 +13,27 @@ def register(request):
         password1 = request.POST['password1']
         password2 = request.POST['password2']
         email = request.POST['email']
+        if len(username) > 10:
+            messages.error(request, "Username must be under 10 characters")
+            return redirect('register')
+        if not username.isalnum():
+            messages.error(request, "Username must only have alphanumeric characters")
+            return redirect('register')
+        if len(password1) < 8:
+            messages.error(request, "Password should be more 8 characters")
+            return redirect('register')
+        if not any(char.isdigit() for char in password1):
+            messages.error('Password should have at least one numeral')
+            return redirect('register')
+        if not any(char.isupper() for char in password1):
+            messages.error('Password should have at least one Uppercase letter')
+            return redirect('register')
+        if not any(char.islower() for char in password1):
+            messages.error('Password should have at least one Lowercase letter')
+            return redirect('register')
+        if not any(char in SpecialSym for char in password1):
+            messages.error('Password should have at least one of the symbols !$@#')
+            return redirect('register')
         if password1 == password2:
             if User.objects.filter(username=username).exists():
                 messages.info(request, 'Username Taken')
