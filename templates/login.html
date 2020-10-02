@@ -9,12 +9,67 @@ body {font-family: Arial, Helvetica, sans-serif;}
 form {border: 2px solid #f1f1f1;}
 
 input[type=text], input[type=password] {
-  width: 100%;
+  width: 60%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
+}
+
+form {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a, .dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 button {
@@ -24,7 +79,7 @@ button {
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 40%;
 }
 
 button:hover {
@@ -42,7 +97,7 @@ img.avatar {
 }
 
 .container {
-  padding: 16px;
+  padding: 0px;
 }
 
 span.psw {
@@ -64,6 +119,20 @@ span.psw {
 </head>
 <body>
 
+<ul>
+  <li><a href="{% url 'about' %}">About us</a></li>
+									<li><a href="{% url 'news' %}">News</a></li>
+                                    <li><a href="{% url 'blogs' %}">Blog</a></li>
+									<li><a href="{% url 'contact' %}">Contact</a></li>
+									{% if user.is_authenticated %}
+									<li>Hello, {{user.username}}</li>
+									<li><a href="http://127.0.0.1:8000/accounts/logout">Logout</a></li>
+									{% else %}
+									<li><a href="http://127.0.0.1:8000/accounts/register">Register</a></li>
+									<li><a href="http://127.0.0.1:8000/accounts/login">LogIn</a></li>
+									{% endif %}
+</ul>
+
 <h2>Login To Travello</h2>
 
 <form action="login" method="post">
@@ -77,15 +146,18 @@ span.psw {
 	<span style="color:red">{{message}}</span><br>
 	{% endfor %}
 	<label for="uname"><b>Username</b></label>
-	<input  type="text" placeholder="Enter Username" value="{{username}}" name="username" required>
+	<input  type="text" placeholder="Enter Username" value="{{username}}" name="username" required><br>
 	<label for="psw"><b>Password</b></label>
 	<input type="password" placeholder="Enter Password" value="{{pass}}" name="pass" required>
-	<button type="submit">Login</button>
+	<button type="submit">Login</button><br>
+	 <a href="http://127.0.0.1:8000/">Cancel</a>
+
   </div>
-  <div class="container" style="background-color:#f1f1f1">
-    <span class="psw"><a href="http://127.0.0.1:8000/">Cancel</a></span>
-  </div>
+
 </form>
+<div class="container" style="background-color:#f1f1f1">
+    <span class="psw"></span>
+  </div>
 
 </body>
 </html>
