@@ -44,8 +44,70 @@
             box-shadow: 0 16px 48px #E3E7EB;
             padding-top: 10px;
         }
-</style>
+        ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
 
+li {
+  float: left;
+}
+
+li a, .dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
+<ul>
+  <li><a href="{% url 'about' %}">About us</a></li>
+									<li><a href="{% url 'news' %}">News</a></li>
+                                    <li><a href="{% url 'blogs' %}">Blog</a></li>
+									<li><a href="{% url 'contact' %}">Contact</a></li>
+									{% if user.is_authenticated %}
+									<li>Hello, {{user.username}}</li>
+									<li><a href="http://127.0.0.1:8000/accounts/logout">Logout</a></li>
+									{% else %}
+									<li><a href="http://127.0.0.1:8000/accounts/register">Register</a></li>
+									<li><a href="http://127.0.0.1:8000/accounts/login">LogIn</a></li>
+									{% endif %}
+</ul>
 <header class="masthead">
     <div class="overlay"></div>
     <div class="container">

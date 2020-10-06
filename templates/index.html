@@ -31,10 +31,10 @@
                             <div class="logo"><a href="http://127.0.0.1:8000/">Travello</a></div>
                             <nav class="main_nav">
                                 <ul class="d-flex flex-row align-items-start justify-content-start">
-                                    <li><a href="{% url 'blogs' %}">Blog</a></li>
+                                    <li><a href="{% url 'about' %}">About us</a></li>
 									<li><a href="{% url 'news' %}">News</a></li>
+									<li><a href="{% url 'blogs' %}">Blog</a></li>
 									<li><a href="{% url 'contact' %}">Contact</a></li>
-									<li><a href="{% url 'about' %}">About us</a></li>
 									{% if user.is_authenticated %}
 									<li>Hello, {{user.username}}</li>
 									<li><a href="accounts/logout">Logout</a></li>
